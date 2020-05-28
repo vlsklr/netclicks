@@ -1,5 +1,7 @@
 const hamburger = document.querySelector(".hamburger");
 const lMenu = document.querySelector(".left-menu");
+const tvList = document.querySelector('.tv-shows__list');
+const modalWin = document.querySelector('.modal');
 
 hamburger.addEventListener('click',function () {
     lMenu.classList.toggle('openMenu');
@@ -10,6 +12,7 @@ document.addEventListener('click',function (event) {
     if(!event.target.closest('.left-menu')) {
         hamburger.classList.remove('open');
         lMenu.classList.remove('openMenu');
+        document.querySelector('.dropdown').classList.remove('active');
     }
 });
 
@@ -22,10 +25,25 @@ lMenu.addEventListener('click', function (event) {
        hamburger.classList.add('open');
    }
 });
-document.querySelector(".tv-shows__list").addEventListener('click',function (event) {
+tvList.addEventListener('click',event => {
     event.preventDefault();
+    const target = event.target;
+    console.log(target);
+    if (target.closest('.tv-card')) {
+        modalWin.classList.remove('hide');
+        document.body.style.overflow = 'hidden';
+    }
+
+
+    /*console.log('lol');
     console.log(event);
-    console.log('lol');
+    if (event.target.closest('.tv-card')) {
+        let item = event.target.closest('.tv-card');
+        let temp = item.querySelector('.tv-card__img').getAttribute('data-backdrop');
+        let temp2 = item.querySelector('.tv-card__img').getAttribute('src');
+        item.querySelector('.tv-card__img').setAttribute('data-backdrop', temp2);
+        item.querySelector('.tv-card__img').setAttribute('src', temp);
+    }*/
 
 });
 
