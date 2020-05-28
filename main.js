@@ -27,13 +27,10 @@ lMenu.addEventListener('click', function (event) {
 });
 tvList.addEventListener('click',event => {
     event.preventDefault();
-    const target = event.target;
-    console.log(target);
-    if (target.closest('.tv-card')) {
+    if (event.target.closest('.tv-card')) {
         modalWin.classList.remove('hide');
         document.body.style.overflow = 'hidden';
     }
-
 
     /*console.log('lol');
     console.log(event);
@@ -46,7 +43,31 @@ tvList.addEventListener('click',event => {
     }*/
 
 });
+modalWin.addEventListener('click', event => {
+    if (event.target.closest('.cross')||(event.target.classList.contains('modal'))) {
+        document.body.style.overflow = '';
+        modalWin.classList.add('hide');
+    }
+});
 
+
+const changeImage = event => {
+    let target = event.target.closest('.tv-shows__item');
+
+    if(target) {
+        let img = target.querySelector('.tv-card__img');
+        if (img.dataset.backdrop) {
+            [img.dataset.backdrop, img.src] = [ img.src, img.dataset.backdrop];
+            /*let temp = target.querySelector('.tv-card__img').getAttribute('data-backdrop');
+            let temp2 = target.querySelector('.tv-card__img').getAttribute('src');
+            target.querySelector('.tv-card__img').setAttribute('data-backdrop', temp2);
+            target.querySelector('.tv-card__img').setAttribute('src', temp);*/
+        }
+    }
+};
+
+tvList.addEventListener('mouseover', changeImage);
+tvList.addEventListener('mouseout',changeImage);
 /*let tvShowsItemList = document.querySelectorAll(".tv-shows__item");
 for(idItem in tvShowsItemList) {
     tvShowsItemList.item(idItem).addEventListener('mouseenter', function (event) {
