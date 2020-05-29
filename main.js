@@ -88,3 +88,20 @@ for(idItem in tvShowsItemList) {
         console.log('1');
     });
 }*/
+const DBService = class {
+    getData = async (url) => {
+        const response = await fetch(url);
+        console.log(response);
+        if (response.ok) {
+            console.log(response.json());
+        }
+    }
+    getTestData = async () => {
+        return await this.getData('test.json');
+    }
+
+}
+new DBService().getTestData().then((data) => {
+    console.log(data);
+}
+);
